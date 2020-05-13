@@ -14,16 +14,16 @@ class JsonPage extends StatefulWidget {
 
 class _JsonPageState extends State<JsonPage> {
  // final decoded = jsonDecode(DefaultAssetBundle.of(context).loadString("asset/jsondat.json")) as List;
-  List<charts.Series<Sales, String>> seriesPieData;
+  List<charts.Series<Sales, String>> seriesBarData;
 // List because we have array of objects in Json file
   _generateData() {
-    var pieData =
+    var barData =
     DefaultAssetBundle.of(context).loadString("asset/jsondat.json");
    // final decoded = jsonDecode(DefaultAssetBundle.of(context).loadString("asset/jsondat.json")) as List;
 // Data we will get from JSON file
-    seriesPieData.add(charts.Series(
+    seriesBarData.add(charts.Series(
   // Add the details of the graph
-     data:pieData,
+     data:barData,
       //   data: decoded,
       domainFn: (Sales sales, _) => sales.salesyear,
       measureFn: (Sales sales, _) => sales.salesval,
@@ -34,7 +34,7 @@ class _JsonPageState extends State<JsonPage> {
   @override
   void initState() {
     super.initState();
-    seriesPieData = jsonDecode(DefaultAssetBundle.of(context).loadString("asset/jsondat.json")) as List;
+    seriesBarData = jsonDecode(DefaultAssetBundle.of(context).loadString("asset/jsondat.json")) as List;
     // decoded data from JSON
     _generateData();
   }
@@ -64,8 +64,8 @@ class _JsonPageState extends State<JsonPage> {
                         height: 10.0,
                       ),
                       Expanded(
-                          child: charts.PieChart(
-                            seriesPieData,
+                          child: charts.BarChart(
+                            seriesBarData,
                             animate: true,
                             animationDuration: Duration(seconds: 5),
                           ))
@@ -106,7 +106,7 @@ class _JsonPageState extends State<JsonPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      app: App(
         title: Text('Load JSON from Local'),
       ),
       body: Center(
